@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.frontend714070"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.frontend714070"
         },
@@ -23,9 +26,6 @@
             "PACKAGE_NAME": "com.ionicframework.frontend714070"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.frontend714070"
-        },
-        "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.frontend714070"
         }
     },
