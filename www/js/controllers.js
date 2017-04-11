@@ -24,6 +24,7 @@ angular.module('controllers', [])
 
     $scope.challenges = [];
     $scope.picture = {}
+    $scope.picTaken = false
 
     $scope.takePicture = function() {
         var options = {
@@ -41,6 +42,7 @@ angular.module('controllers', [])
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
             $scope.picture.url = $scope.imgURI
+            $scope.picTaken = true
             }, function(err) {
                 console.log(err)
         })
@@ -49,8 +51,9 @@ angular.module('controllers', [])
     $scope.addPicture = function(){
         $http.post("https://madcap.herokuapp.com/pictures", $scope.picture)
           .then(function(response){
-            console.log(response)
             $scope.picture = {}
+            $scope.picTaken = false
+            console.log(response)
         });
     }
 
