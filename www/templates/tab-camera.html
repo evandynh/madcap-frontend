@@ -1,17 +1,17 @@
 <ion-view view-title="Camera">
   <ion-content ng-contorller="CameraCtrl">
     <ion-list>
-      <div class="list card">
+      <div ng-repeat="challenge in challenges" class="list card">
 
         <div class="item item-avatar">
-          <h2>Challenge: Animal Lover</h2>
-          <p>points: 2</p>
+          <h2>Challenge: {{challenge.title}}</h2>
+          <p>points: {{challenge.points}}</p>
         </div>
 
         <div class="item item-body">
           <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
           <img ng-show="imgURI === undefined" ng-src="https://lh6.ggpht.com/5pHdNWdGk9mtsdXJe-yd7G-hcJDCWLRtkySTJQTyQbix8-1VxyVILt355AMflveH_U8=w300">
-          <p>Take a selfie with a non-domestic animal!</p>
+          <p>{{challenge.description}}</p>
           <p>
             <a href="#" class="subdued">1 Like</a>
             <a href="#" class="subdued">5 Comments</a>

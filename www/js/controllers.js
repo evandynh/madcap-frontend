@@ -1,13 +1,28 @@
 angular.module('controllers', [])
 
-.controller('HomeCtrl', function($scope) {})
+.controller('HomeCtrl', function($scope, $http) {
+  $scope.pictures = []
+  $scope.likes = 0
+
+  $scope.numLikes = function(){
+      $scope.likes += 1
+  }
+
+  $http.get("https://madcap.herokuapp.com/pictures", { cache: true })
+    .then(function(response){
+      console.log(response)
+      $scope.pictures = response.data.pictures
+  });
+})
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };
 })
-.controller("CameraCtrl", function($scope, $cordovaCamera) {
+.controller("CameraCtrl", function($scope, $cordovaCamera, $http) {
+
+    $scope.challenges = [];
 
     $scope.takePicture = function() {
         var options = {
@@ -24,9 +39,22 @@ angular.module('controllers', [])
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
+            
         }, function(err) {
             console.log(err)
         });
     }
+
+    $http.get("https://madcap.herokuapp.com/challenges", { cache: true })
+      .then(function(response){
+        console.log(response)
+        $scope.challenges = response.data.challenges
+    });
+
+    $http.get("https://madcap.herokuapp.com/pictures", { cache: true })
+      .then(function(response){
+        console.log(response)
+        $scope.pictures = response.data.pictures
+    });
 
 });
