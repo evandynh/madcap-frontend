@@ -23,6 +23,7 @@ angular.module('controllers', [])
 .controller("CameraCtrl", function($scope, $cordovaCamera, $http) {
 
     $scope.challenges = [];
+    $scope.picture = {}
 
     $scope.takePicture = function() {
         var options = {
@@ -39,9 +40,17 @@ angular.module('controllers', [])
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
-            
-        }, function(err) {
-            console.log(err)
+            $scope.picture.url = $scope.imgURI
+            }, function(err) {
+                console.log(err)
+        })
+    }
+
+    $scope.addPicture = function(){
+        $http.post("https://madcap.herokuapp.com/pictures", $scope.picture)
+          .then(function(response){
+            console.log(response)
+            $scope.picture = {}
         });
     }
 
@@ -49,12 +58,6 @@ angular.module('controllers', [])
       .then(function(response){
         console.log(response)
         $scope.challenges = response.data.challenges
-    });
-
-    $http.get("https://madcap.herokuapp.com/pictures", { cache: true })
-      .then(function(response){
-        console.log(response)
-        $scope.pictures = response.data.pictures
     });
 
 });
