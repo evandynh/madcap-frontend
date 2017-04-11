@@ -1,4 +1,4 @@
-angular.module('controllers', ['ngCordova'])
+angular.module('controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
