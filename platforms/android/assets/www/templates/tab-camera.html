@@ -1,27 +1,45 @@
 <ion-view view-title="Camera">
   <ion-content ng-contorller="CameraCtrl">
     <ion-list>
-      <div class="list card">
+      <div ng-repeat="challenge in challenges" class="list card">
 
         <div class="item item-avatar">
-          <h2>Challenge: Animal Lover</h2>
-          <p>points: 2</p>
+          <h2>Challenge: {{challenge.title}}</h2>
+          <p>points: {{challenge.points}}</p>
         </div>
 
         <div class="item item-body">
-          <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+          <!-- //===========================================
+              //=====Before Picture Elements===============
+              //=========================================== -->
           <img ng-show="imgURI === undefined" ng-src="https://lh6.ggpht.com/5pHdNWdGk9mtsdXJe-yd7G-hcJDCWLRtkySTJQTyQbix8-1VxyVILt355AMflveH_U8=w300">
-          <p>Take a selfie with a non-domestic animal!</p>
-          <p>
-            <a href="#" class="subdued">1 Like</a>
-            <a href="#" class="subdued">5 Comments</a>
-          </p>
+          <p ng-show="imgURI === undefined">{{challenge.description}}</p>
+          <!-- //===========================================
+              //=====After Picture Taken===============
+              //=========================================== -->
+              <form ng-show="imgURI !== undefined" ng-submit="addPicture()">
+                <div>
+                  <img ng-src="{{imgURI}}">
+                  <input type="text" ng-model="picture.description" placeholder="Description here...">
+                </div>
+                <button type="submit" value="Submit Challenge" class="button button-balanced pull-center">Submit Challenge</button>
+              </form>
+
         </div>
 
       </div>
-        <button class="button button-balanced pull-center" ng-click="takePicture()">
+      <!-- //===========================================
+          //=====Before Picture Elements===============
+          //=========================================== -->
+        <button ng-show="imgURI === undefined" class="button button-balanced pull-center" ng-click="takePicture()">
           Accept Challenge
         </button>
+        <!-- //===========================================
+            //=====After Picture Taken===============
+            //=========================================== -->
+        <!-- <button ng-show="imgURI !== undefined" class="button button-balanced pull-center" ng-submit="addPicture()">
+          Submit Challenge
+        </button> -->
       </ion-item>
     </ion-list>
   </ion-content>

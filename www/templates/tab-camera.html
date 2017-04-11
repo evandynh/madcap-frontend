@@ -22,7 +22,7 @@
                   <img ng-src="{{imgURI}}">
                   <input type="text" ng-model="picture.description" placeholder="Description here...">
                 </div>
-                <input type="submit" value="submit">
+                <button type="submit" value="Submit Challenge" class="button button-balanced pull-center">Submit Challenge</button>
               </form>
 
         </div>
@@ -37,9 +37,9 @@
         <!-- //===========================================
             //=====After Picture Taken===============
             //=========================================== -->
-        <button ng-show="imgURI !== undefined" class="button button-balanced pull-center" ng-submit="addPicture()">
+        <!-- <button ng-show="imgURI !== undefined" class="button button-balanced pull-center" ng-submit="addPicture()">
           Submit Challenge
-        </button>
+        </button> -->
       </ion-item>
     </ion-list>
   </ion-content>
