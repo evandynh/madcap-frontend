@@ -26,28 +26,26 @@ angular.module('controllers', [])
     enableFriends: true
   };
 })
-.controller('CameraCtrl', function($scope, $cordovaCamera) {
+.controller("CameraCtrl", function($scope, $cordovaCamera) {
 
-  document.addEventListener("deviceready", function () {
-    var options = {
-      quality: 50,
-      destinationType: Camera.DestinationType.FILE_URL,
-      sourceType: Camera.PictureSourceType.CAMERA,
-      allowEdit: true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
-      popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false,
-	    correctOrientation:true,
-    };
+    $scope.takePicture = function() {
+        var options = {
+            quality : 100,
+            destinationType : Camera.DestinationType.DATA_URL,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
 
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-      var image = document.getElementById('myImage');
-      $scope.imgURI = "data:image/jpeg;base64," + imageData;
-    }, function(err) {
-      if(err) throw err
-    });
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        }, function(err) {
+            console.log(err)
+        });
+    }
 
-  }, false);
 });
