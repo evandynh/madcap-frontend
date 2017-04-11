@@ -41,7 +41,7 @@ angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCord
   // Each tab has its own nav history stack:
 
   .state('tab.home', {
-    url: '/dash',
+    url: '/home',
     views: {
       'tab-home': {
         templateUrl: 'templates/tab-home.html',
@@ -70,6 +70,6 @@ angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCord
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });
