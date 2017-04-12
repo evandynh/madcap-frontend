@@ -1,4 +1,9 @@
 <ion-view view-title="Challenge">
+  <ion-nav-buttons side="right">
+      <button class="button" ng-click="login()">
+        <i class="icon ion-log-in"> Login</i>
+      </button>
+    </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <div ng-repeat="challenge in challenges" class="list card">

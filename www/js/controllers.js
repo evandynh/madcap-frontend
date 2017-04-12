@@ -1,13 +1,52 @@
 angular.module('controllers', [])
 
-.controller('HomeCtrl', function($scope, $http, $timeout) {
+.controller('HomeCtrl', function($scope, $http, $timeout, $ionicModal) {
   $scope.pictures = []
   $scope.likes = 0
 
+//==============================================================
+//==== LOGIN MODAL METHODS ==============
+//==============================================================
+// Form data for the login modal
+$scope.loginData = {};
+
+// Create the login modal that we will use later
+$ionicModal.fromTemplateUrl('templates/login.html', {
+  scope: $scope
+}).then(function(modal) {
+  $scope.modal = modal;
+});
+
+// Triggered in the login modal to close it
+$scope.closeLogin = function() {
+  $scope.modal.hide();
+};
+
+// Open the login modal
+$scope.login = function() {
+  $scope.modal.show();
+};
+
+// Perform the login action when the user submits the login form
+$scope.doLogin = function() {
+  console.log('Doing login', $scope.loginData);
+
+  // Simulate a login delay. Remove this and replace with your login
+  // code if using a login system
+  $timeout(function() {
+    $scope.closeLogin();
+  }, 1000);
+};
+//==============================================================
+//==== Method for incrementing picture likes ==============
+//==============================================================
   $scope.numLikes = function() {
       $scope.likes += 1
   }
 
+//==============================================================
+//==== Refreshing images on tab =====================
+//==============================================================
   $scope.doRefresh = function() {
     $timeout(function(){
       $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
@@ -19,6 +58,9 @@ angular.module('controllers', [])
     }, 1000)
   }
 
+//==============================================================
+//==== Grabs all pictures from backend ========================
+//==============================================================
     $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
       .then(function(response){
         console.log(response)
@@ -37,6 +79,9 @@ angular.module('controllers', [])
     $scope.picture = {}
     $scope.picTaken = false
 
+//==============================================================
+//==== Method for taking picture and saving URL ================
+//==============================================================
     $scope.takePicture = function() {
         var options = {
             quality : 100,
@@ -59,6 +104,9 @@ angular.module('controllers', [])
         })
     }
 
+//==============================================================
+//==== Method for Adding Pictures to Database ==================
+//==============================================================
     $scope.addPicture = function(){
         $http.post("https://madcap.herokuapp.com/pictures", $scope.picture)
           .then(function(response){
@@ -68,6 +116,9 @@ angular.module('controllers', [])
         });
     }
 
+//==============================================================
+//==== Method for Getting Challenges from Database ==================
+//==============================================================
     $http.get("https://madcap.herokuapp.com/challenges", { cache: true })
       .then(function(response){
         console.log(response)
