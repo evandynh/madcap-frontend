@@ -4114,7 +4114,7 @@ a.subdued {
     background: none; }
 
 .bar-stable .button {
-  border-color: #b2b2b2;
+  /*border-color: #b2b2b2;*/
   background-color: #f8f8f8;
   color: #444; }
   .bar-stable .button:hover {

@@ -1,12 +1,27 @@
 <ion-view view-title="Home">
-  <ion-content ng-contorller="HomeCtrl">
+  <ion-nav-buttons side="right">
+      <button class="button" ng-click="login()">
+        <i class="icon ion-log-in"> Login</i>
+      </button>
+    </ion-nav-buttons>
+  <ion-content>
     <ion-refresher on-refresh="doRefresh()">
     </ion-refresher>
       <ion-list>
         <div ng-repeat="picture in pictures">
           <div class="row" ng-if="$even">
-            <div class="col col-50"><img ng-src="{{pictures[$index].url}}" class="col"></div>
-            <div class="col col-50"><img ng-src="{{pictures[$index + 1].url}}" class="col"></div>
+            <div class="col col-50">
+              <img ng-src="{{pictures[$index].url}}" class="col" ng-click="numLikes()">
+              <a href="#" id="likes" ng-click="numLikes()" class="subdued">
+                <i class="icon ion-thumbsup"> like <span ng-show="likes > 0">{{likes}}</span></i>
+              </a>
+            </div>
+            <div class="col col-50">
+              <img ng-src="{{pictures[$index + 1].url}}" class="col">
+              <a href="#" id="likes" ng-click="numLikes()" class="subdued">
+                <i class="icon ion-thumbsup"> like <span ng-show="likes > 0">{{likes}}</span></i>
+              </a>
+            </div>
           </div>
         </div>
         </ion-item>
