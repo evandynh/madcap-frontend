@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCordova'])
+angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCordova', 'auth.controller'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

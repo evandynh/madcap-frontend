@@ -5,10 +5,10 @@ angular.module('controllers', [])
   $scope.likes = 0
 
 //==============================================================
-//==== LOGIN MODAL METHODS ==============
+//==== LOGIN MODAL OPEN/CLOSE ==============
 //==============================================================
 // Form data for the login modal
-$scope.loginData = {};
+// $scope.loginData = {};
 
 // Create the login modal that we will use later
 $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -28,15 +28,15 @@ $scope.login = function() {
 };
 
 // Perform the login action when the user submits the login form
-$scope.doLogin = function() {
-  console.log('Doing login', $scope.loginData);
+// $scope.doLogin = function() {
+//   console.log('Doing login', $scope.loginData);
 
   // Simulate a login delay. Remove this and replace with your login
   // code if using a login system
-  $timeout(function() {
-    $scope.closeLogin();
-  }, 1000);
-};
+  // $timeout(function() {
+  //   $scope.closeLogin();
+  // }, 1000);
+// };
 //==============================================================
 //==== Method for incrementing picture likes ==============
 //==============================================================
@@ -124,64 +124,5 @@ $scope.doLogin = function() {
         console.log(response)
         $scope.challenges = response.data.challenges
     });
-
-})
-.controller("SignInCtrl", function($log, AuthService, userService, $state) {
-
-      var vm = this;
-
-      // BINDINGS
-      vm.signUp = {
-        email:    "eric@ga.co",
-        name:     "Eric Van Dyn Hoven",
-        password: "12345",
-        passwordConfirmation: "12345"
-      };
-      vm.submitSignUp = submitSignUp;
-      vm.logIn = {
-        email:    "eric@ga.co",
-        password: "12345"
-      };
-      vm.submitLogIn = submitLogIn;
-      vm.conflict = false;
-
-    // FUNCTIONS
-    function submitSignUp() {
-      userService
-        .create(vm.signUp)
-        .then(function(res) {
-          return AuthService.logIn(vm.signUp);
-        })
-        .then(
-          // on success
-          function(decodedToken) {
-            $log.info('Logged in!', decodedToken);
-            $state.go('home');
-          },
-          // on error
-          function(err) {
-            if (err.status === 409) vm.conflict = true;
-            $log.info('Error Claire-r:', err);
-          }
-        );
-    }
-
-    function submitLogIn() {
-      AuthService
-        .logIn(vm.logIn)
-        .then(
-          // on success
-          function(decodedToken) {
-            $log.info('Logged in!', decodedToken);
-            $state.go('home');
-          },
-          // on error
-          function(err) {
-            $log.info('Error:', err);
-          }
-        );
-    }
-
-    $log.info("SignInController loaded!");
 
 });
