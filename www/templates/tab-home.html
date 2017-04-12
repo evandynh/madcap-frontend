@@ -3,8 +3,11 @@
     <ion-refresher on-refresh="doRefresh()">
     </ion-refresher>
       <ion-list>
-        <div class="row" ng-repeat="picture in pictures">
-          <div><img ng-src="{{picture.url}}" class="col col-50"></div>
+        <div ng-repeat="picture in pictures">
+          <div class="row" ng-if="$even">
+            <div class="col col-50"><img ng-src="{{pictures[$index].url}}" class="col"></div>
+            <div class="col col-50"><img ng-src="{{pictures[$index + 1].url}}" class="col"></div>
+          </div>
         </div>
         </ion-item>
       </ion-list>

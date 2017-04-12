@@ -1,18 +1,29 @@
 angular.module('controllers', [])
 
-.controller('HomeCtrl', function($scope, $http) {
+.controller('HomeCtrl', function($scope, $http, $timeout) {
   $scope.pictures = []
   $scope.likes = 0
 
-  $scope.numLikes = function(){
+  $scope.numLikes = function() {
       $scope.likes += 1
   }
 
-  $http.get("https://madcap.herokuapp.com/pictures", { cache: true })
-    .then(function(response){
-      console.log(response)
-      $scope.pictures = response.data.pictures
-  });
+  $scope.doRefresh = function() {
+    $timeout(function(){
+      $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
+        .then(function(response){
+          console.log(response)
+          $scope.pictures = response.data.pictures
+      });
+      $scope.$broadcast("scroll.refreshComplete")
+    }, 1000)
+  }
+
+    $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
+      .then(function(response){
+        console.log(response)
+        $scope.pictures = response.data.pictures
+    });
 })
 
 .controller('AccountCtrl', function($scope) {

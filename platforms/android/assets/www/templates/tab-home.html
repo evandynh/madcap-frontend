@@ -1,16 +1,10 @@
 <ion-view view-title="Home">
   <ion-content ng-contorller="HomeCtrl">
+    <ion-refresher on-refresh="doRefresh()">
+    </ion-refresher>
       <ion-list>
-        <div ng-repeat="picture in pictures" class="list card">
-
-          <div class="item item-body">
-            <img ng-src="{{picture.url}}">
-            <p>{{picture.description}}</p>
-            <p>
-              {{likes}}<a href="#" id="likes" ng-click="numLikes()" class="subdued"> Like</a>
-            </p>
-          </div>
-
+        <div class="row" ng-repeat="picture in pictures">
+          <div><img ng-src="{{picture.url}}" class="col col-50"></div>
         </div>
         </ion-item>
       </ion-list>
