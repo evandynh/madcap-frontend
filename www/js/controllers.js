@@ -13,21 +13,21 @@ angular.module('controllers', [])
 // $scope.loginData = {};
 
 // Create the login modal that we will use later
-$ionicModal.fromTemplateUrl('templates/login.html', {
-  scope: $scope
-}).then(function(modal) {
-  $scope.modal = modal;
-});
+// $ionicModal.fromTemplateUrl('templates/login.html', {
+//   scope: $scope
+// }).then(function(modal) {
+//   $scope.modal = modal;
+// });
 
 // Triggered in the login modal to close it
-$scope.closeLogin = function() {
-  $scope.modal.hide();
-};
+// $scope.closeLogin = function() {
+//   $scope.modal.hide();
+// };
 
 // Open the login modal
-$scope.login = function() {
-  $scope.modal.show();
-};
+// $scope.login = function() {
+//   $scope.modal.show();
+// };
 
 // Perform the login action when the user submits the login form
 // $scope.doLogin = function() {
@@ -72,6 +72,8 @@ $scope.login = function() {
 //==== PROFILE CONTROLLER ==============
 //==============================================================
 .controller('AccountCtrl', ['$scope','$log','userService', 'authService','$state',function($scope, $log, userService, authService, $state) {
+
+  $scope.name = authService.isLoggedIn()
 
   $scope.signUp = {
     email:    "eric@ga.co",
@@ -127,6 +129,13 @@ $scope.login = function() {
       );
   }
 
+  $scope.submitLogOut = function() {
+    console.log('clicked');
+    authService
+      .logOut()
+  }
+
+
   $log.info("SignInController loaded!");
 
 }])
@@ -134,7 +143,7 @@ $scope.login = function() {
 //==============================================================
 //==== CAMERA CONTROLLER ==============
 //==============================================================
-.controller("CameraCtrl", function($scope, $cordovaCamera, $http) {
+.controller("CameraCtrl", [function($scope, $cordovaCamera, $http) {
 
     $scope.challenges = [];
     $scope.picture = {}
@@ -180,4 +189,4 @@ $scope.login = function() {
         $scope.challenges = response.data.challenges
     });
 
-});
+}]);

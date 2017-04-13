@@ -1,7 +1,8 @@
 <!-- Sign-Up Form Begin-->
-<ion-view view-title="Signup">
+<ion-view view-title="Profile">
     <ion-content>
       <div ng-hide="toggleValue">
+        <h2 class="text-center">Sign in</h2>
         <form ng-submit="submitLogIn()">
           <div class="list">
             <label class="item item-input">
@@ -14,15 +15,17 @@
             </label>
               <button type="submit" class="button button-block button-positive">Login</button>
               <!-- ng-disabled="signInForm.$invalid" originally in button tag -->
+            </div>
         </form>
-
+      <button ng-click="submitLogOut()" class="button button-block button-positive">Logout</button>
         <p>
+          {{name.name}}
             If you are not a user yet,
             <a ng-click="toggleValue = !toggleValue">Sign Up</a>.
         </p>
-      </div>
-
+    </div>
       <div ng-show="toggleValue">
+        <h2 class="text-center">Sign up</h2>
         <form ng-submit="submitSignUp();">
           <div class="list">
             <label class="item item-input">

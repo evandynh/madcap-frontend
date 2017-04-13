@@ -1,89 +1,69 @@
 <!-- Sign-Up Form Begin-->
-<div class="sign-in-form" ng-hide="vm.toggleValue">
-  <ion-modal-view>
-  <!-- <ion-header-bar> -->
+<ion-modal-view>
+  <ion-header-bar>
     <div class="sign-in-form">
-      <h1 class="title">Sign In</h1>
+      <h1 class="title" ng-hide="toggleValue">Sign In</h1>
+      <h1 class="title" ng-show="toggleValue">Sign Up</h1>
       <div class="buttons">
         <button class="button" ng-click="closeLogin()">
           <i class="icon ion-ios-arrow-back"> Back</i>
         </button>
       </div>
     </div>
-  <!-- </ion-header-bar> -->
-  <!-- <ion-content> -->
-      <form ng-submit="vm.click()" name="signInForm" novalidate>
+  </ion-header-bar>
+  <ion-content>
+    <div ng-hide="toggleValue">
+      <form ng-submit="submitLogIn()">
         <div class="list">
-          <label class="item item-input" for="exampleInputEmail1">
+          <label class="item item-input">
             <span class="input-label">Email</span>
-            <input ng-model="vm.logIn.email" type="email" ng-model="email" name="email" required class="form-control" id="exampleInputEmail1" placeholder="Email">
+            <input ng-model="logIn.email" type="email" ng-model="email" placeholder="Email">
           </label>
           <label class="item item-input" for="exampleInputPassword1">
             <span class="input-label">Password</span>
-            <input ng-model="vm.logIn.password" type="password" ng-model="password" name="password" required class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input ng-model="logIn.password" type="password" ng-model="password" placeholder="Password">
           </label>
-          <label class="item">
             <button type="submit" class="button button-block button-positive">Login</button>
             <!-- ng-disabled="signInForm.$invalid" originally in button tag -->
-          </label>
-        </div>
+          </div>
       </form>
 
       <p>
           If you are not a user yet,
-          <a ng-click="vm.click()">Sign Up</a>.
+          <a ng-click="toggleValue = !toggleValue">Sign Up</a>.
       </p>
-    <!-- </ion-content> -->
-  </ion-modal-view>
-  </div>
-<!-- Sign-In-Form End -->
-
-<!-- Sign-Up Form Begin-->
-<div class="sign-in-form" ng-show="toggleValue">
-  <ion-modal-view>
-    <!-- <ion-header-bar> -->
-      <div class="sign-up-form">
-        <h1 class="title text-center">Sign Up</h1>
-        <div class="buttons">
-          <button class="button" ng-click="closeLogin()">
-            <i class="icon ion-ios-arrow-back"> Back</i>
-          </button>
-        </div>
-      </div>
-    <!-- </ion-header-bar> -->
-    <!-- <ion-content> -->
+    </div>
+    <div ng-show="toggleValue">
       <form ng-submit="submitSignUp();">
         <div class="list">
-          <label class="item item-input" for="exampleInputEmail1">
+          <label class="item item-input">
             <span class="input-label">Email</span>
-            <input ng-model="signUp.email" type="email" ng-class="{'red-border': conflict}" class="form-control" id="exampleInputEmail1" placeholder="Email">
-            <small ng-show="conflict" class="text-danger"><em>Email exists…</em></small>
+            <input ng-model="signUp.email" type="email" id="exampleInputEmail1" placeholder="Email">
+            <!-- <small ng-show="conflict" class="text-danger"><em>Email exists…</em></small> -->
           </label>
-          <label class="item item-input" for="exampleInputName">
+          <label class="item item-input">
             <span class="input-label">Name</span>
-            <input ng-model="signUp.name" type="text" class="form-control" id="exampleInputName" placeholder="Name">
+            <input ng-model="signUp.name" type="text" placeholder="Name">
           </label>
-          <label class="item item-input" for="exampleInputPassword1">
+          <label class="item item-input">
             <span class="input-label">Password</span>
-            <input ng-model="signUp.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input ng-model="signUp.password" type="password" placeholder="Password">
           </label>
-          <label class="item item-input" for="exampleInputPassword2">
+          <label class="item item-input">
             <span class="input-label">Password confirmation</span>
-            <input ng-model="signUp.passwordConfirmation" type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            <input ng-model="signUp.passwordConfirmation" type="password" placeholder="Password">
           </label>
-          <label for="">
-            <button type="submit" class="button button-block button-positive">Signup</button>
-          </label>
+          <button type="submit" class="button button-block button-positive">Signup</button>
         </div>
       </form>
 
       <p>
         <strong>
           If you are already a user,
-          <a class="underline" ng-click="toggleValue = !toggleValue;"><u>Sign In</u></a>.
+          <a class="underline" ng-click="toggleValue = !toggleValue">Sign In</a>.
         </strong>
       </p>
-  <!-- </ion-content> -->
-  </ion-modal-view>
-</div>
-  <!-- sign-up-form end -->
+    </div>
+  </ion-content>
+</ion-modal-view>
+<!-- Sign-In-Form End -->

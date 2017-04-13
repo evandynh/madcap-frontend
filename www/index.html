@@ -38,12 +38,17 @@
     <script src="js/services.js"></script>
   </head>
   <body>
-    
+
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
+        <!-- <button ng-hide="authService.isLoggedIn()" class="button">
+        </button>
+        <button ng-show="authService.isLoggedIn()" ng-click= "authService.logOut()" class="button">
+          <i class="icon ion-log-out"> Logout</i>
+        </button> -->
       </ion-nav-back-button>
     </ion-nav-bar>
     <!--
