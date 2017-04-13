@@ -8,7 +8,6 @@ angular.module('controllers', [])
 function($scope, $ionicModal, $http, $log, userService, authService, $state) {
 
   $scope.pictures = []
-  $scope.likes = 0
 
 //==== LOGIN MODAL OPEN/CLOSE ==============
 
@@ -58,8 +57,8 @@ $scope.submitLogOut = function() {
 }
 
 //==== Method for incrementing picture likes ==============
-  $scope.numLikes = function() {
-      $scope.likes += 1
+  $scope.numLikes = function(likes) {
+      likes += 1
   }
 
 //==== Refreshing images on tab =====================
