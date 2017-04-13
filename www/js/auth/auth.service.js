@@ -18,8 +18,8 @@
     return service;
 
     function isLoggedIn() {
-      // return (token.retrieve() != null);
-      return token.decode();
+      return (token.retrieve() != null);
+      // return token.decode();
     }
 
     function logIn(data) {

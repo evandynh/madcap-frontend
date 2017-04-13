@@ -1,14 +1,17 @@
 <ion-view view-title="Challenge">
   <ion-nav-buttons side="right">
-      <button class="button" ng-click="login()">
+      <button ng-hide="loggedIn()" class="button" ng-click="goToLogin()">
         <i class="icon ion-log-in"> Login</i>
+      </button>
+      <button ng-show="loggedIn()" class="button" ng-click="submitLogOut()">
+        <i class="icon ion-log-out"> Logout</i>
       </button>
     </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <div ng-repeat="challenge in challenges" class="list card">
 
-        <div class="item item-avatar">
+        <div class="item">
           <h2>Challenge: {{challenge.title}}</h2>
           <p>points: {{challenge.points}}</p>
         </div>
@@ -19,7 +22,7 @@
               //=========================================== -->
           <img ng-show="!picTaken && imgURI === undefined" ng-src="https://lh6.ggpht.com/5pHdNWdGk9mtsdXJe-yd7G-hcJDCWLRtkySTJQTyQbix8-1VxyVILt355AMflveH_U8=w300">
           <p ng-show="!picTaken && imgURI === undefined">{{challenge.description}}</p>
-          <button ng-show="!picTaken && imgURI === undefined" class="button button-balanced pull-center" ng-click="takePicture()">
+          <button ng-show="loggedIn() && !picTaken && imgURI === undefined" class="button button-balanced pull-center" ng-click="takePicture()">
             Accept Challenge
           </button>
           <!-- //===========================================

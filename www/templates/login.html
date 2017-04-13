@@ -1,5 +1,5 @@
 <!-- Sign-Up Form Begin-->
-<ion-modal-view>
+<ion-modal-view ng-controller="SignInCtrl">
   <ion-header-bar>
     <div class="sign-in-form">
       <h1 class="title" ng-hide="toggleValue">Sign In</h1>
@@ -17,11 +17,11 @@
         <div class="list">
           <label class="item item-input">
             <span class="input-label">Email</span>
-            <input ng-model="logIn.email" type="email" ng-model="email" placeholder="Email">
+            <input ng-model="self.logIn.email" type="email" ng-model="email" placeholder="Email">
           </label>
           <label class="item item-input" for="exampleInputPassword1">
             <span class="input-label">Password</span>
-            <input ng-model="logIn.password" type="password" ng-model="password" placeholder="Password">
+            <input ng-model="self.logIn.password" type="password" ng-model="password" placeholder="Password">
           </label>
             <button type="submit" class="button button-block button-positive">Login</button>
             <!-- ng-disabled="signInForm.$invalid" originally in button tag -->

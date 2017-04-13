@@ -1,5 +1,10 @@
 <!-- Sign-Up Form Begin-->
 <ion-view view-title="Profile">
+  <ion-nav-buttons side="right">
+      <button ng-show="loggedIn()" class="button" ng-click="submitLogOut()">
+        <i class="icon ion-log-out"> Logout</i>
+      </button>
+    </ion-nav-buttons>
     <ion-content>
       <div ng-hide="toggleValue">
         <h2 class="text-center">Sign in</h2>
