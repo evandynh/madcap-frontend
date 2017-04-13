@@ -1,11 +1,35 @@
-<ion-view view-title="Account">
-  <ion-content>
-    <div class="list">
+<ion-
+    <ion-content>
+      <form ng-submit="submitSignUp();">
+        <div class="list">
+          <label class="item item-input" for="exampleInputEmail1">
+            <span class="input-label">Email</span>
+            <input ng-model="signUp.email" type="email" ng-class="{'red-border': conflict}" class="form-control" id="exampleInputEmail1" placeholder="Email">
+            <small ng-show="conflict" class="text-danger"><em>Email exists…</em></small>
+          </label>
+          <label class="item item-input" for="exampleInputName">
+            <span class="input-label">Name</span>
+            <input ng-model="signUp.name" type="text" class="form-control" id="exampleInputName" placeholder="Name">
+          </label>
+          <label class="item item-input" for="exampleInputPassword1">
+            <span class="input-label">Password</span>
+            <input ng-model="signUp.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </label>
+          <label class="item item-input" for="exampleInputPassword2">
+            <span class="input-label">Password confirmation</span>
+            <input ng-model="signUp.passwordConfirmation" type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+          </label>
+          <label for="">
+            <button type="submit" class="button button-block button-positive">Signup</button>
+          </label>
+        </div>
+      </form>
 
-      <a class="item item-icon-left" href="#">
-        <i class="icon ion-email"></i>
-        Logout
-      </a>
-
-    </div>  </ion-content>
-</ion-view>
+      <p>
+        <strong>
+          If you are already a user,
+          <a class="underline" ng-click="toggleValue = !toggleValue;"><u>Sign In</u></a>.
+        </strong>
+      </p>
+  </ion-content>
+  <!-- sign-up-form end -->

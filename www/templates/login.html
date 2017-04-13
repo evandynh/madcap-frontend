@@ -1,7 +1,7 @@
 <!-- Sign-Up Form Begin-->
-<div class="sign-in-form" ng-hide="vm.toggleValue">
+<!-- <div class="sign-in-form" ng-hide="vm.toggleValue" ng-controller="SignInCtrl">
   <ion-modal-view>
-  <!-- <ion-header-bar> -->
+  <ion-header-bar>
     <div class="sign-in-form">
       <h1 class="title">Sign In</h1>
       <div class="buttons">
@@ -10,9 +10,9 @@
         </button>
       </div>
     </div>
-  <!-- </ion-header-bar> -->
-  <!-- <ion-content> -->
-      <form ng-submit="vm.submitLogIn();" name="signInForm" novalidate>
+  </ion-header-bar>
+  <ion-content>
+      <form ng-submit="vm.click()" name="signInForm" novalidate>
         <div class="list">
           <label class="item item-input" for="exampleInputEmail1">
             <span class="input-label">Email</span>
@@ -24,26 +24,24 @@
           </label>
           <label class="item">
             <button type="submit" class="button button-block button-positive">Login</button>
-            <!-- ng-disabled="signInForm.$invalid" originally in button tag -->
+            ng-disabled="signInForm.$invalid" originally in button tag
           </label>
         </div>
       </form>
 
       <p>
-        <strong>
           If you are not a user yet,
-          <a class="underline" ng-click="vm.toggleValue = !vm.toggleValue;"><u>Sign Up</u></a>.
-        </strong>
+          <a ng-click="vm.click()">Sign Up</a>.
       </p>
-    <!-- </ion-content> -->
+    </ion-content>
   </ion-modal-view>
-  </div>
-<!-- Sign-In-Form End-->
+  </div> -->
+<!-- Sign-In-Form End -->
 
 <!-- Sign-Up Form Begin-->
-<div class="sign-in-form" ng-show="vm.toggleValue">
+<div class="sign-in-form" ng-hide="toggleValue">
   <ion-modal-view>
-    <!-- <ion-header-bar> -->
+    <ion-header-bar>
       <div class="sign-up-form">
         <h1 class="title text-center">Sign Up</h1>
         <div class="buttons">
@@ -52,26 +50,26 @@
           </button>
         </div>
       </div>
-    <!-- </ion-header-bar> -->
-    <!-- <ion-view> -->
-      <form ng-submit="vm.submitSignUp();">
+    </ion-header-bar>
+    <ion-content>
+      <form ng-submit="submitSignUp();">
         <div class="list">
           <label class="item item-input" for="exampleInputEmail1">
             <span class="input-label">Email</span>
-            <input ng-model="vm.signUp.email" type="email" ng-class="{'red-border': vm.conflict}" class="form-control" id="exampleInputEmail1" placeholder="Email">
-            <small ng-show="vm.conflict" class="text-danger"><em>Email exists…</em></small>
+            <input ng-model="signUp.email" type="email" ng-class="{'red-border': conflict}" class="form-control" id="exampleInputEmail1" placeholder="Email">
+            <small ng-show="conflict" class="text-danger"><em>Email exists…</em></small>
           </label>
           <label class="item item-input" for="exampleInputName">
             <span class="input-label">Name</span>
-            <input ng-model="vm.signUp.name" type="text" class="form-control" id="exampleInputName" placeholder="Name">
+            <input ng-model="signUp.name" type="text" class="form-control" id="exampleInputName" placeholder="Name">
           </label>
           <label class="item item-input" for="exampleInputPassword1">
             <span class="input-label">Password</span>
-            <input ng-model="vm.signUp.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input ng-model="signUp.password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
           </label>
           <label class="item item-input" for="exampleInputPassword2">
             <span class="input-label">Password confirmation</span>
-            <input ng-model="vm.signUp.passwordConfirmation" type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+            <input ng-model="signUp.passwordConfirmation" type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
           </label>
           <label for="">
             <button type="submit" class="button button-block button-positive">Signup</button>
@@ -82,10 +80,10 @@
       <p>
         <strong>
           If you are already a user,
-          <a class="underline" ng-click="vm.toggleValue = !vm.toggleValue;"><u>Sign In</u></a>.
+          <a class="underline" ng-click="toggleValue = !toggleValue;"><u>Sign In</u></a>.
         </strong>
       </p>
-  <!-- </ion-view> -->
+  </ion-content>
   </ion-modal-view>
 </div>
   <!-- sign-up-form end -->

@@ -50,6 +50,16 @@ angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCord
     }
   })
 
+  .state('tab.login', {
+    url: '/login',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/login.html',
+        controller: 'SignInCtrl'
+      }
+    }
+  })
+
   .state('tab.account', {
     url: '/account',
     views: {
