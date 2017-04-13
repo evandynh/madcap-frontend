@@ -1,11 +1,57 @@
-<ion-view view-title="Account">
-  <ion-content>
-    <div class="list">
+<!-- Sign-Up Form Begin-->
+<ion-view view-title="Signup">
+    <ion-content>
+      <div ng-hide="toggleValue">
+        <form ng-submit="submitLogIn()">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Email</span>
+              <input ng-model="logIn.email" type="email" ng-model="email" placeholder="Email">
+            </label>
+            <label class="item item-input" for="exampleInputPassword1">
+              <span class="input-label">Password</span>
+              <input ng-model="logIn.password" type="password" ng-model="password" placeholder="Password">
+            </label>
+              <button type="submit" class="button button-block button-positive">Login</button>
+              <!-- ng-disabled="signInForm.$invalid" originally in button tag -->
+        </form>
 
-      <a class="item item-icon-left" href="#">
-        <i class="icon ion-email"></i>
-        Logout
-      </a>
+        <p>
+            If you are not a user yet,
+            <a ng-click="toggleValue = !toggleValue">Sign Up</a>.
+        </p>
+      </div>
 
-    </div>  </ion-content>
+      <div ng-show="toggleValue">
+        <form ng-submit="submitSignUp();">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Email</span>
+              <input ng-model="signUp.email" type="email" id="exampleInputEmail1" placeholder="Email">
+              <!-- <small ng-show="conflict" class="text-danger"><em>Email exists…</em></small> -->
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Name</span>
+              <input ng-model="signUp.name" type="text" placeholder="Name">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Password</span>
+              <input ng-model="signUp.password" type="password" placeholder="Password">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Password confirmation</span>
+              <input ng-model="signUp.passwordConfirmation" type="password" placeholder="Password">
+            </label>
+              <button type="submit" class="button button-block button-positive">Signup</button>
+          </div>
+        </form>
+
+      <p>
+        <strong>
+          If you are already a user,
+          <a class="underline" ng-click="toggleValue = !toggleValue">Sign In</a>.
+        </strong>
+      </p>
+    </div>
+  </ion-content>
 </ion-view>

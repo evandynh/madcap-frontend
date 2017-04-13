@@ -1,14 +1,16 @@
 angular.module('controllers', [])
 
-.controller('HomeCtrl', function($scope, $http, $timeout, $ionicModal) {
+//==============================================================
+//==== HOME CONTROLLER ==============
+//==============================================================
+.controller('HomeCtrl', function($scope, $http, $timeout, $ionicModal, $log, authService, userService, $state ) {
+
   $scope.pictures = []
   $scope.likes = 0
 
-//==============================================================
-//==== LOGIN MODAL METHODS ==============
-//==============================================================
+//==== LOGIN MODAL OPEN/CLOSE ==============
 // Form data for the login modal
-$scope.loginData = {};
+// $scope.loginData = {};
 
 // Create the login modal that we will use later
 $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -28,25 +30,21 @@ $scope.login = function() {
 };
 
 // Perform the login action when the user submits the login form
-$scope.doLogin = function() {
-  console.log('Doing login', $scope.loginData);
+// $scope.doLogin = function() {
+//   console.log('Doing login', $scope.loginData);
 
   // Simulate a login delay. Remove this and replace with your login
   // code if using a login system
-  $timeout(function() {
-    $scope.closeLogin();
-  }, 1000);
-};
-//==============================================================
+  // $timeout(function() {
+  //   $scope.closeLogin();
+  // }, 1000);
+// };
 //==== Method for incrementing picture likes ==============
-//==============================================================
   $scope.numLikes = function() {
       $scope.likes += 1
   }
 
-//==============================================================
 //==== Refreshing images on tab =====================
-//==============================================================
   $scope.doRefresh = function() {
     $timeout(function(){
       $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
@@ -58,9 +56,11 @@ $scope.doLogin = function() {
     }, 1000)
   }
 
-//==============================================================
+// FUNCTIONS
+
+
+
 //==== Grabs all pictures from backend ========================
-//==============================================================
     $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
       .then(function(response){
         console.log(response)
@@ -68,20 +68,79 @@ $scope.doLogin = function() {
     });
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+//==============================================================
+//==== PROFILE CONTROLLER ==============
+//==============================================================
+.controller('AccountCtrl', ['$scope','$log','userService', 'authService','$state',function($scope, $log, userService, authService, $state) {
+
+  $scope.signUp = {
+    email:    "eric@ga.co",
+    name:     "Eric Van Dyn Hoven",
+    password: "12345",
+    passwordConfirmation: "12345"
   };
-})
+  $scope.logIn = {
+    email:    "eric@ga.co",
+    password: "12345"
+  };
+  $scope.conflict = false;
+
+  $scope.click = function(){
+      console.log('clicked')
+  }
+
+  $scope.submitSignUp = function() {
+    console.log('made it here');
+    userService
+      .create($scope.signUp)
+      .then(function(res) {
+        return authService.logIn($scope.signUp);
+      })
+      .then(
+        // on success
+        function(decodedToken) {
+          $log.info('Logged in!', decodedToken);
+          $state.go('tab.home');
+        },
+        // on error
+        function(err) {
+          if (err.status === 409) $scope.conflict = true;
+          $log.info('Error Claire-r:', err);
+        }
+      );
+  }
+
+  $scope.submitLogIn = function() {
+    console.log('clicked');
+    authService
+      .logIn($scope.logIn)
+      .then(
+        // on success
+        function(decodedToken) {
+          $log.info('Logged in!', decodedToken);
+          $state.go('tab.home');
+        },
+        // on error
+        function(err) {
+          $log.info('Error:', err);
+        }
+      );
+  }
+
+  $log.info("SignInController loaded!");
+
+}])
+
+//==============================================================
+//==== CAMERA CONTROLLER ==============
+//==============================================================
 .controller("CameraCtrl", function($scope, $cordovaCamera, $http) {
 
     $scope.challenges = [];
     $scope.picture = {}
     $scope.picTaken = false
 
-//==============================================================
 //==== Method for taking picture and saving URL ================
-//==============================================================
     $scope.takePicture = function() {
         var options = {
             quality : 100,
@@ -104,9 +163,7 @@ $scope.doLogin = function() {
         })
     }
 
-//==============================================================
 //==== Method for Adding Pictures to Database ==================
-//==============================================================
     $scope.addPicture = function(){
         $http.post("https://madcap.herokuapp.com/pictures", $scope.picture)
           .then(function(response){
@@ -116,9 +173,7 @@ $scope.doLogin = function() {
         });
     }
 
-//==============================================================
 //==== Method for Getting Challenges from Database ==================
-//==============================================================
     $http.get("https://madcap.herokuapp.com/challenges", { cache: true })
       .then(function(response){
         console.log(response)
