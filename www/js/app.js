@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCordova', 'auth.controller'])
+angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -46,16 +46,6 @@ angular.module('madcapApp', ['ionic', 'controllers', 'starter.services', 'ngCord
       'tab-home': {
         templateUrl: 'templates/tab-home.html',
         controller: 'HomeCtrl'
-      }
-    }
-  })
-
-  .state('tab.login', {
-    url: '/login',
-    views: {
-      'tab-home': {
-        templateUrl: 'templates/login.html',
-        controller: 'SignInCtrl'
       }
     }
   })

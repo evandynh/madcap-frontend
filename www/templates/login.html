@@ -1,7 +1,7 @@
 <!-- Sign-Up Form Begin-->
-<!-- <div class="sign-in-form" ng-hide="vm.toggleValue" ng-controller="SignInCtrl">
+<div class="sign-in-form" ng-hide="vm.toggleValue">
   <ion-modal-view>
-  <ion-header-bar>
+  <!-- <ion-header-bar> -->
     <div class="sign-in-form">
       <h1 class="title">Sign In</h1>
       <div class="buttons">
@@ -10,8 +10,8 @@
         </button>
       </div>
     </div>
-  </ion-header-bar>
-  <ion-content>
+  <!-- </ion-header-bar> -->
+  <!-- <ion-content> -->
       <form ng-submit="vm.click()" name="signInForm" novalidate>
         <div class="list">
           <label class="item item-input" for="exampleInputEmail1">
@@ -24,7 +24,7 @@
           </label>
           <label class="item">
             <button type="submit" class="button button-block button-positive">Login</button>
-            ng-disabled="signInForm.$invalid" originally in button tag
+            <!-- ng-disabled="signInForm.$invalid" originally in button tag -->
           </label>
         </div>
       </form>
@@ -33,15 +33,15 @@
           If you are not a user yet,
           <a ng-click="vm.click()">Sign Up</a>.
       </p>
-    </ion-content>
+    <!-- </ion-content> -->
   </ion-modal-view>
-  </div> -->
+  </div>
 <!-- Sign-In-Form End -->
 
 <!-- Sign-Up Form Begin-->
-<div class="sign-in-form" ng-hide="toggleValue">
+<div class="sign-in-form" ng-show="toggleValue">
   <ion-modal-view>
-    <ion-header-bar>
+    <!-- <ion-header-bar> -->
       <div class="sign-up-form">
         <h1 class="title text-center">Sign Up</h1>
         <div class="buttons">
@@ -50,8 +50,8 @@
           </button>
         </div>
       </div>
-    </ion-header-bar>
-    <ion-content>
+    <!-- </ion-header-bar> -->
+    <!-- <ion-content> -->
       <form ng-submit="submitSignUp();">
         <div class="list">
           <label class="item item-input" for="exampleInputEmail1">
@@ -83,7 +83,7 @@
           <a class="underline" ng-click="toggleValue = !toggleValue;"><u>Sign In</u></a>.
         </strong>
       </p>
-  </ion-content>
+  <!-- </ion-content> -->
   </ion-modal-view>
 </div>
   <!-- sign-up-form end -->

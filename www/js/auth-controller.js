@@ -5,23 +5,23 @@ SignInCtrl.$inject = ["$log", "authService", "userService", "$state"];
 
 function SignInCtrl($log, $scope, authService, userService, $state) {
 
-      // var $scope = this;
+      var self = this;
       // BINDINGS
-      $scope.signUp = {
+      self.signUp = {
         email:    "eric@ga.co",
         name:     "Eric Van Dyn Hoven",
         password: "12345",
         passwordConfirmation: "12345"
       };
-      $scope.submitSignUp = submitSignUp;
-      $scope.logIn = {
+      self.submitSignUp = submitSignUp;
+      self.logIn = {
         email:    "eric@ga.co",
         password: "12345"
       };
-      $scope.submitLogIn = submitLogIn;
-      $scope.conflict = false;
+      self.submitLogIn = submitLogIn;
+      self.conflict = false;
 
-      $scope.click = click
+      self.click = click
 
     // FUNCTIONS
 
@@ -31,9 +31,9 @@ function SignInCtrl($log, $scope, authService, userService, $state) {
 
     function submitSignUp() {
       userService
-        .create($scope.signUp)
+        .create(self.signUp)
         .then(function(res) {
-          return AuthService.logIn($scope.signUp);
+          return AuthService.logIn(self.signUp);
         })
         .then(
           // on success
@@ -43,7 +43,7 @@ function SignInCtrl($log, $scope, authService, userService, $state) {
           },
           // on error
           function(err) {
-            if (err.status === 409) $scope.conflict = true;
+            if (err.status === 409) self.conflict = true;
             $log.info('Error Claire-r:', err);
           }
         );
@@ -52,7 +52,7 @@ function SignInCtrl($log, $scope, authService, userService, $state) {
     function submitLogIn() {
       console.log('clicked');
       AuthService
-        .logIn($scope.logIn)
+        .logIn(self.logIn)
         .then(
           // on success
           function(decodedToken) {

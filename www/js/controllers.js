@@ -3,9 +3,7 @@ angular.module('controllers', [])
 //==============================================================
 //==== HOME CONTROLLER ==============
 //==============================================================
-.controller('HomeCtrl', ['$scope', '$http', '$timeout', '$ionicModal', '$log', 'authService', 'userService', '$state',
-
-  function($scope, $http, $timeout, $ionicModal, $log, authService, userService, $state ) {
+.controller('HomeCtrl', function($scope, $http, $timeout, $ionicModal, $log, authService, userService, $state ) {
 
   $scope.pictures = []
   $scope.likes = 0
@@ -68,12 +66,12 @@ $scope.login = function() {
         console.log(response)
         $scope.pictures = response.data.pictures
     });
-}])
+})
 
 //==============================================================
 //==== PROFILE CONTROLLER ==============
 //==============================================================
-.controller('AccountCtrl', function($scope, $log) {
+.controller('AccountCtrl', ['$scope','$log','userService', 'authService','$state',function($scope, $log, userService, authService, $state) {
 
   $scope.signUp = {
     email:    "eric@ga.co",
@@ -92,6 +90,7 @@ $scope.login = function() {
   }
 
   $scope.submitSignUp = function() {
+    console.log('made it here');
     userService
       .create($scope.signUp)
       .then(function(res) {
@@ -101,7 +100,7 @@ $scope.login = function() {
         // on success
         function(decodedToken) {
           $log.info('Logged in!', decodedToken);
-          $state.go('home');
+          $state.go('tab.home');
         },
         // on error
         function(err) {
@@ -119,7 +118,7 @@ $scope.login = function() {
         // on success
         function(decodedToken) {
           $log.info('Logged in!', decodedToken);
-          $state.go('home');
+          $state.go('tab.home');
         },
         // on error
         function(err) {
@@ -130,7 +129,7 @@ $scope.login = function() {
 
   $log.info("SignInController loaded!");
 
-})
+}])
 
 //==============================================================
 //==== CAMERA CONTROLLER ==============
