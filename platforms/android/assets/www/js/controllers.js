@@ -3,9 +3,9 @@ angular.module('controllers', [])
 //==============================================================
 //==== HOME CONTROLLER ==============
 //==============================================================
-.controller('HomeCtrl', ['$scope', '$ionicModal', '$http', '$log','userService', 'authService','$state',
+.controller('HomeCtrl', ['$scope', '$ionicModal', '$http', '$timeout', '$log','userService', 'authService','$state',
 
-function($scope, $ionicModal, $http, $log, userService, authService, $state) {
+function($scope, $ionicModal, $http, $timeout, $log, userService, authService, $state) {
 
   $scope.pictures = []
 
@@ -69,11 +69,7 @@ $scope.submitLogOut = function() {
 //==== Refreshing images on tab =====================
   $scope.doRefresh = function() {
     $timeout(function(){
-      $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
-        .then(function(response){
-          console.log(response)
-          $scope.pictures = response.data.pictures
-      });
+      getPictures()
       $scope.$broadcast("scroll.refreshComplete")
     }, 1000)
   }
