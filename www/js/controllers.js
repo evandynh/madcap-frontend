@@ -3,12 +3,13 @@ angular.module('controllers', [])
 //==============================================================
 //==== HOME CONTROLLER ==============
 //==============================================================
-.controller('HomeCtrl', ['$scope', '$ionicModal', '$http', '$log','userService', 'authService','$state',
+.controller('HomeCtrl', ['$scope', '$ionicModal', '$http', '$timeout', '$log','userService', 'authService','$state',
 
-function($scope, $ionicModal, $http, $log, userService, authService, $state) {
+function($scope, $ionicModal, $http, $timeout, $log, userService, authService, $state) {
 
   $scope.pictures = []
 
+  getPictures()
 //==== LOGIN MODAL OPEN/CLOSE ==============
 
 // Create the login modal that we will use later
@@ -57,18 +58,18 @@ $scope.submitLogOut = function() {
 }
 
 //==== Method for incrementing picture likes ==============
-  $scope.numLikes = function(likes) {
-      likes += 1
+  $scope.numLikes = function(picture) {
+      picture.likes += 1
+      $http.patch("https://madcap.herokuapp.com/pictures/"+ picture._id, picture)
+      .then(function(){
+        getPictures()
+      })
   }
 
 //==== Refreshing images on tab =====================
   $scope.doRefresh = function() {
     $timeout(function(){
-      $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
-        .then(function(response){
-          console.log(response)
-          $scope.pictures = response.data.pictures
-      });
+      getPictures()
       $scope.$broadcast("scroll.refreshComplete")
     }, 1000)
   }
@@ -78,11 +79,13 @@ $scope.submitLogOut = function() {
 
 
 //==== Grabs all pictures from backend ========================
+function getPictures() {
     $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
       .then(function(response){
         console.log(response)
         $scope.pictures = response.data.pictures
     });
+  }
 }])
 
 //==============================================================
@@ -177,6 +180,23 @@ function($scope, $cordovaCamera, $http, $log, userService, authService, $state) 
     $scope.picture = {}
     $scope.picTaken = false
 
+    // === Checks if a user is signed in =============================
+    $scope.loggedIn = function(){
+      return authService.isLoggedIn()
+    }
+
+    // ==== Checks if a user is signed in ========================
+    $scope.goToLogin = function(){
+      $state.go('tab.account')
+    }
+
+    // === Delete token and sign out ================================
+    $scope.submitLogOut = function() {
+      console.log('clicked');
+      authService
+      .logOut()
+    }
+
 //==== Method for taking picture and saving URL ================
     $scope.takePicture = function() {
         var options = {
@@ -210,22 +230,6 @@ function($scope, $cordovaCamera, $http, $log, userService, authService, $state) 
         });
     }
 
-// === Checks if a user is signed in =============================
-    $scope.loggedIn = function(){
-      return authService.isLoggedIn()
-    }
-
-  // ==== Checks if a user is signed in ========================
-    $scope.goToLogin = function(){
-      $state.go('tab.account')
-    }
-
-// === Delete token and sign out ================================
-    $scope.submitLogOut = function() {
-      console.log('clicked');
-      authService
-        .logOut()
-    }
 
 //==== Method for Getting Challenges from Database ==================
     $http.get("https://madcap.herokuapp.com/challenges", { cache: true })

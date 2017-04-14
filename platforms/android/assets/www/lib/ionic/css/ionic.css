@@ -3924,11 +3924,13 @@ a.subdued {
       background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%); }
   .bar.bar-stable {
     border-color: #b2b2b2;
-    background-color: #f8f8f8;
+    background-color: orange;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: #444; }
     .bar.bar-stable .title {
-      color: #444; }
+      font-family: 'Bangers', cursive;
+      font-size: 25px;
+      color: #FFF; }
     .bar.bar-stable.bar-footer {
       background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
   .bar.bar-positive {
@@ -4115,8 +4117,8 @@ a.subdued {
 
 .bar-stable .button {
   /*border-color: #b2b2b2;*/
-  background-color: #f8f8f8;
-  color: #444; }
+  background: transparent;
+  color: white; }
   .bar-stable .button:hover {
     color: #444;
     text-decoration: none; }
@@ -5707,6 +5709,8 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   font-size: 16px; }
   .item h2 {
     margin: 0 0 2px 0;
+    color: #fff;
+    font-family: 'Bungee Inline', cursive;
     font-size: 16px;
     font-weight: normal; }
   .item h3 {
@@ -6653,6 +6657,8 @@ button.item.item-button-right {
     border-left: 0;
     border-right: 0; }
   .card .item:first-child {
+    background-color: #33cd5f;
+    color: #fff;
     border-top: 0; }
   .card .item:last-child {
     border-bottom: 0; }

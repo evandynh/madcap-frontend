@@ -12,9 +12,9 @@
     </ion-refresher>
       <ion-list>
         <div class="home-div" ng-repeat="picture in pictures">
-          <img ng-src="{{pictures[$index].url}}" class="col home-img" ng-click="numLikes(picture.likes)">
-          <a href="#" id="pic-likes" class="subdued">
-            <i class="icon ion-thumbsup"> like <span ng-show="picture.likes > 0">{{picture.likes}}</span></i>
+          <img ng-src="{{picture.url}}" class="col home-img" ng-click="numLikes({{picture}})">
+          <a id="pic-likes" class="subdued">
+            <i class="icon ion-thumbsup"> like <span ng-show="{{picture.likes}} > 0">{{picture.likes}}</span></i>
           </a>
         </div>
         </ion-item>

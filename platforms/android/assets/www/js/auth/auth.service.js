@@ -19,6 +19,7 @@
 
     function isLoggedIn() {
       return (token.retrieve() != null);
+      // return token.decode();
     }
 
     function logIn(data) {
@@ -45,6 +46,7 @@
 
     function logOut() {
       token.destroy();
+      console.log("you've been logged out!");
     }
   }
 

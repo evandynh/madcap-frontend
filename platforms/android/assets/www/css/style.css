@@ -1,1 +1,21 @@
 /* Empty. Add your own CSS if you like */
+.home-div{
+  position: relative;
+  width: 50%;
+  float: left;
+  }
+
+.home-img {
+  padding: 0;
+}
+
+#pic-likes {
+  position: absolute;
+  top: 150px;
+  left: 9px;
+  width: 33%;
+  color: white;
+  border: .5px solid white;
+  border-radius: 5px;
+  background-color: rgba(0, 102, 255, .6);
+}

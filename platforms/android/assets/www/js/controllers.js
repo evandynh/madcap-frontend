@@ -3,14 +3,14 @@ angular.module('controllers', [])
 //==============================================================
 //==== HOME CONTROLLER ==============
 //==============================================================
-.controller('HomeCtrl', function($scope, $http, $timeout, $ionicModal, $log, authService, userService, $state ) {
+.controller('HomeCtrl', ['$scope', '$ionicModal', '$http', '$log','userService', 'authService','$state',
+
+function($scope, $ionicModal, $http, $log, userService, authService, $state) {
 
   $scope.pictures = []
-  $scope.likes = 0
 
+  getPictures()
 //==== LOGIN MODAL OPEN/CLOSE ==============
-// Form data for the login modal
-// $scope.loginData = {};
 
 // Create the login modal that we will use later
 $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -30,18 +30,40 @@ $scope.login = function() {
 };
 
 // Perform the login action when the user submits the login form
-// $scope.doLogin = function() {
-//   console.log('Doing login', $scope.loginData);
+$scope.doLogin = function() {
+  console.log('Doing login', $scope.loginData);
 
   // Simulate a login delay. Remove this and replace with your login
   // code if using a login system
-  // $timeout(function() {
-  //   $scope.closeLogin();
-  // }, 1000);
-// };
+  $timeout(function() {
+    $scope.closeLogin();
+  }, 1000);
+};
+
+// Checks if a user is signed in =============================
+$scope.loggedIn = function(){
+  return authService.isLoggedIn()
+}
+
+// ==== Checks if a user is signed in ========================
+  $scope.goToLogin = function(){
+    $state.go('tab.account')
+  }
+
+// Delete token and sign out =================================
+$scope.submitLogOut = function() {
+  console.log('clicked');
+  authService
+    .logOut()
+}
+
 //==== Method for incrementing picture likes ==============
-  $scope.numLikes = function() {
-      $scope.likes += 1
+  $scope.numLikes = function(picture) {
+      picture.likes += 1
+      $http.patch("https://madcap.herokuapp.com/pictures/"+ picture._id, picture)
+      .then(function(){
+        getPictures()
+      })
   }
 
 //==== Refreshing images on tab =====================
@@ -61,17 +83,23 @@ $scope.login = function() {
 
 
 //==== Grabs all pictures from backend ========================
+function getPictures() {
     $http.get("https://madcap.herokuapp.com/pictures", { cache: false })
       .then(function(response){
         console.log(response)
         $scope.pictures = response.data.pictures
     });
-})
+  }
+}])
 
 //==============================================================
 //==== PROFILE CONTROLLER ==============
 //==============================================================
-.controller('AccountCtrl', ['$scope','$log','userService', 'authService','$state',function($scope, $log, userService, authService, $state) {
+.controller('AccountCtrl', ['$scope','$log','userService', 'authService','$state',
+
+function($scope, $log, userService, authService, $state) {
+
+  $scope.name = authService.isLoggedIn()
 
   $scope.signUp = {
     email:    "eric@ga.co",
@@ -127,6 +155,19 @@ $scope.login = function() {
       );
   }
 
+// ==== Checks if a user is signed in ========================
+  $scope.loggedIn = function(){
+    return authService.isLoggedIn()
+  }
+
+// ==== Delete token and sign out ============================
+  $scope.submitLogOut = function() {
+    console.log('clicked');
+    authService
+      .logOut()
+  }
+
+
   $log.info("SignInController loaded!");
 
 }])
@@ -134,11 +175,31 @@ $scope.login = function() {
 //==============================================================
 //==== CAMERA CONTROLLER ==============
 //==============================================================
-.controller("CameraCtrl", function($scope, $cordovaCamera, $http) {
+.controller("CameraCtrl", ['$scope', '$cordovaCamera', '$http', '$log','userService', 'authService','$state',
+
+function($scope, $cordovaCamera, $http, $log, userService, authService, $state) {
+// .controller("CameraCtrl", [function($scope, $cordovaCamera, $http) {
 
     $scope.challenges = [];
     $scope.picture = {}
     $scope.picTaken = false
+
+    // === Checks if a user is signed in =============================
+    $scope.loggedIn = function(){
+      return authService.isLoggedIn()
+    }
+
+    // ==== Checks if a user is signed in ========================
+    $scope.goToLogin = function(){
+      $state.go('tab.account')
+    }
+
+    // === Delete token and sign out ================================
+    $scope.submitLogOut = function() {
+      console.log('clicked');
+      authService
+      .logOut()
+    }
 
 //==== Method for taking picture and saving URL ================
     $scope.takePicture = function() {
@@ -173,6 +234,7 @@ $scope.login = function() {
         });
     }
 
+
 //==== Method for Getting Challenges from Database ==================
     $http.get("https://madcap.herokuapp.com/challenges", { cache: true })
       .then(function(response){
@@ -180,4 +242,4 @@ $scope.login = function() {
         $scope.challenges = response.data.challenges
     });
 
-});
+}]);
